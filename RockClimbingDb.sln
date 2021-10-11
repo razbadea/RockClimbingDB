@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockClimbingDb", "RockClimbingDb.csproj", "{B494A6B0-949C-4C86-9BBC-BAE9CB372E90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockClimbingDb.Tests", "..\RockClimbingDb.Tests\RockClimbingDb.Tests.csproj", "{90176BF7-71E3-40DA-BC23-FB26FEB8F9D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B494A6B0-949C-4C86-9BBC-BAE9CB372E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B494A6B0-949C-4C86-9BBC-BAE9CB372E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B494A6B0-949C-4C86-9BBC-BAE9CB372E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B494A6B0-949C-4C86-9BBC-BAE9CB372E90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90176BF7-71E3-40DA-BC23-FB26FEB8F9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90176BF7-71E3-40DA-BC23-FB26FEB8F9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90176BF7-71E3-40DA-BC23-FB26FEB8F9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90176BF7-71E3-40DA-BC23-FB26FEB8F9D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79C8B74A-0B35-4B59-B143-97CA9831443F}
+	EndGlobalSection
+EndGlobal
