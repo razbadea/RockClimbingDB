@@ -1,10 +1,19 @@
-﻿@{
+﻿@using RockClimbingDb.ViewModels
+@model HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Rock Climbing DB</h1>
 </div>
+
+
+@foreach (var climb in Model.LatestClimbs)
+{
+    <div>@climb.Note</div>
+}
 
 <div class="row">
     <div class="col-md-4">

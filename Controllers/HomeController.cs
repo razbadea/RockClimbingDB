@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RockClimbingDb.DAL;
+using RockClimbingDb.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,10 +9,18 @@ using System.Web.Mvc;
 namespace RockClimbingDb.Controllers
 {
     public class HomeController : Controller
-    {
+    {        
+        private readonly ClimbRepository _climbRepository;
+        public HomeController()
+        {
+            _climbRepository = new ClimbRepository();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var model = new HomeViewModel();
+            model.LatestClimbs = _climbRepository.GetLastestClimbs(5);
+            return View(model);
         }
 
         public ActionResult About()

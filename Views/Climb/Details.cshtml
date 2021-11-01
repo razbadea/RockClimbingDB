@@ -1,0 +1,90 @@
+﻿@model RockClimbingDb.Models.Climb
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Climb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Climber.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Climber.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfAscent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfAscent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Style)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Style)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfTries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfTries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFirstAscent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFirstAscent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposedRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposedRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposedGrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposedGrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

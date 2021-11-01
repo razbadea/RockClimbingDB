@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using RockClimbingDb.DAL;
 using RockClimbingDb.Models;
 
 namespace RockClimbingDb.Controllers
@@ -155,14 +156,28 @@ namespace RockClimbingDb.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //create climber from climber repository
+                    var dbUser = await UserManager.FindByEmailAsync(model.Email);                   
+                    var climber = new Climber()
+                    {
+                        ApplicationUserId = dbUser.Id,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        DateOfBirth = model.DateOfBirth,
+                        Email = model.Email
+                    };
+                    var climberRepository = new ClimberRepository();
+                    climberRepository.Add(climber);
+
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    var tst = User;
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
