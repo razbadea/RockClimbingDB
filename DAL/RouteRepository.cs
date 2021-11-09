@@ -1,4 +1,6 @@
 ﻿using RockClimbingDb.Models;
+using RockClimbingDb.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -81,6 +83,32 @@ namespace RockClimbingDb.DAL
                 });
             }
             return result;
+        }
+
+        public RouteDetailsViewModel GetRouteWithLocationDetailsByRouteId(int routeId)
+        {
+            using (var db = new RockClimbingDbContext())
+            {
+                var route = db
+                    .Routes
+                    .FirstOrDefault(t => t.Id == routeId);
+                var sector = db.Sectors.FirstOrDefault(t => t.Id == route.SectorId);
+                var crag = db.Crags.FirstOrDefault(t => t.Id == sector.CragId);
+                var area = db.Areas.FirstOrDefault(t => t.Id == crag.AreaId);
+                var country = db.Countries.First(t => t.Id == area.CountryId);
+                var result = new RouteDetailsViewModel() 
+                {
+                    Name = route.Name,
+                    Grade = route.Grade,
+                    Rating = route.Rating,
+                    SectorName = sector.Name,
+                    CragName = crag.Name,
+                    AreaName = area.Name,
+                    CountryName = country.Name
+                };
+
+                return result;
+            }
         }
 
         public void Add(Route route)

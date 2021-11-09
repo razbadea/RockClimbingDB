@@ -48,5 +48,14 @@ namespace RockClimbingDb.DAL
                 return result;
             }
         }
+
+        public Climber GetClimberByClimberId(int climberId)
+        {
+            using (var db = new RockClimbingDbContext())
+            {
+                var result = db.Climbers.FirstOrDefault(t => t.Id == climberId);
+                return result;
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿@model RockClimbingDb.Models.Climb
+﻿@using RockClimbingDb.Common
+
+@model RockClimbingDb.ViewModels.ClimberClimbRouteViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,21 +13,52 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Climber.FirstName)
+            @Html.DisplayNameFor(model => model.ClimberName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Climber.FirstName)
+            @Html.DisplayFor(model => model.ClimberName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Route.Name)
+            @Html.DisplayNameFor(model => model.RouteName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Route.Name)
+            @Html.DisplayFor(model => model.RouteName)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteSector)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteSector)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteCrag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteCrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteCountry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteCountry)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DateOfAscent)
         </dt>
@@ -67,11 +100,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ProposedGrade)
+            @Html.DisplayNameFor(model => model.Grade)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProposedGrade)
+            @Model.GradeEnum.GetDisplayName()
         </dd>
 
         <dt>
@@ -85,6 +118,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "Climbs")
 </p>

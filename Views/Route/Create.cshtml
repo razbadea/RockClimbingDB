@@ -1,6 +1,7 @@
 ﻿@using RockClimbingDb.Common;
 @using System;
 @using RockClimbingDb.ViewModels;
+
 @model RockClimbingDb.Models.Route
 
 @{
@@ -21,7 +22,7 @@
     });
 
 
-    var routeLocation = new RouteLocationViewModel();
+    var routeLocation = new RouteDetailsViewModel();
 
 }
 
@@ -68,9 +69,7 @@
         @Html.Label("Sector", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.DropDownListFor(m => m.SectorId, new List<SelectListItem>(), new
-            {
-                onchange = "addRoute_Sector_onChange(this)", id = "sector_dropdown"
-
+            {id = "sector_dropdown"
             })
         </div>
     </div>

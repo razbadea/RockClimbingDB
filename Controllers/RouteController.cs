@@ -38,13 +38,6 @@ namespace RockClimbingDb.Controllers
             return View(model);
         }
 
-        //public ActionResult Index(int count)
-        //{
-        //    var model = _routeRepository
-        //        .GetRoutes()
-        //        .Take(count);
-        //    return View(model);
-        //}
 
         public ActionResult Create()
         {
@@ -91,9 +84,9 @@ namespace RockClimbingDb.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetRoutes(int? cragId)
+        public ActionResult GetRoutes(int? sectorId)
         {
-            var result = _routeRepository.GetAllRoutesBySector(cragId);
+            var result = _routeRepository.GetAllRoutesBySector(sectorId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

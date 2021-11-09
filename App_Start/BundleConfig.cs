@@ -24,9 +24,10 @@ namespace RockClimbingDb
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+            "~/Content/DataTables/css/jquery.dataTables.min.css"));
             bundles.Add(new ScriptBundle("~/bundles/generic").Include(
-                        "~/Scripts/generic.js"));
+                        "~/Scripts/generic.js", "~/Scripts/DataTables/jquery.dataTables.min.js"));
 
 
         }

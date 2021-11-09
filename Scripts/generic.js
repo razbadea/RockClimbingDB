@@ -1,85 +1,125 @@
-﻿function addRoute_Country_onChange(el) {
-    console.log(el);
+﻿
+//Add Route
+function addRoute_Country_onChange(el) {
     var countryId = el.value;
-    console.log(countryId);
+    AreaDropdown_Populate(countryId, $("#area_dropdown"));
+}
 
+function addRoute_Area_onChange(el) {
+    var areaId = el.value;
+    CragDropdown_Populate(areaId, $("#crag_dropdown"));
+}
+
+function addRoute_Crag_onChange(el) {
+    var cragId = el.value;
+    SectorDropdown_Populate(cragId, $("#sector_dropdown"));
+}
+
+function addClimb_Country_onChange(el) {
+    var countryId = el.value;
+    AreaDropdown_Populate(countryId, $("#area_dropdown"));
+}
+
+function addClimb_Area_onChange(el) {
+    var areaId = el.value;
+    CragDropdown_Populate(areaId, $("#crag_dropdown"));
+}
+
+function addClimb_Crag_onChange(el) {
+    var cragId = el.value;
+    SectorDropdown_Populate(cragId, $("#sector_dropdown"));
+}
+
+function addClimb_Sector_onChange(el) {
+    var sectorId = el.value;
+    RouteDropdown_Populate(sectorId, $("#route_dropdown"));
+}
+
+
+//Generic
+function AreaDropdown_Populate(countryId, areaDropdown) {
+    $(areaDropdown).empty();
+    $(areaDropdown).change();
+    if (countryId == null || countryId == "") {
+        return;
+    }
     $.ajax({
-        url: 'GetAreas',
+        url: '/Route/GetAreas',
         type: 'get',
         data: { countryId: countryId },
         dataType: 'json',
         success: function (response) {
-
-            var len = response.length;
-            console.log(response);
-            $("#area_dropdown").empty();
-            var default_value = null;
-            var default_text = "Select Area"
-            $("#area_dropdown").append("<option value='" + default_value + "'>" + default_text + "</option>");
-            for (var i = 0; i < len; i++) {
-                var id = response[i]['Id'];
-                var name = response[i]['Name'];
-
-                $("#area_dropdown").append("<option value='" + id + "'>" + name + "</option>");
-            }
+            PopulateDropdown(response, areaDropdown);
         }
     });
-
 }
 
-function addRoute_Area_onChange(el) {
-    console.log(el);
-    var areaId = el.value;
-    console.log(areaId);
-
+function CragDropdown_Populate(areaId, cragDropdown) {
+    $(cragDropdown).empty();
+    $(cragDropdown).change();
+    if (areaId == null || areaId == "") {
+        return;
+    }
     $.ajax({
-        url: 'GetCrags',
+        url: '/Route/GetCrags',
         type: 'get',
         data: { areaId: areaId },
         dataType: 'json',
         success: function (response) {
-
-            var len = response.length;
-            console.log(response);
-            $("#crag_dropdown").empty();
-            var default_value = null;
-            var default_text = "Select Crag"
-            $("#crag_dropdown").append("<option value='" + default_value + "'>" + default_text + "</option>");
-            for (var i = 0; i < len; i++) {
-                var id = response[i]['Id'];
-                var name = response[i]['Name'];
-
-                $("#crag_dropdown").append("<option value='" + id + "'>" + name + "</option>");
-            }
+            PopulateDropdown(response, cragDropdown);
         }
     });
 }
 
-function addRoute_Crag_onChange(el) {
-    console.log(el);
-    var cragId = el.value;
-    console.log(cragId);
-
+function SectorDropdown_Populate(cragId, sectorDropdown) {
+    $(sectorDropdown).empty();
+    $(sectorDropdown).change();
+    if (cragId == null || cragId == "") {
+        return;
+    }
     $.ajax({
-        url: 'GetSectors',
+        url: '/Route/GetSectors',
         type: 'get',
         data: { cragId: cragId },
         dataType: 'json',
         success: function (response) {
-
-            var len = response.length;
-            console.log(response);
-            $("#sector_dropdown").empty();
-            var default_value = null;
-            var default_text = "Select Sector"
-            $("#sector_dropdown").append("<option value='" + default_value + "'>" + default_text + "</option>");
-            for (var i = 0; i < len; i++) {
-                var id = response[i]['Id'];
-                var name = response[i]['Name'];
-
-                $("#sector_dropdown").append("<option value='" + id + "'>" + name + "</option>");
-            }
+            PopulateDropdown(response, sectorDropdown);
         }
     });
+}
+
+function RouteDropdown_Populate(sectorId, routeDropdown) {
+    $(routeDropdown).empty();
+    $(routeDropdown).change();
+    if (sectorId == null || sectorId == "") {
+        return;
+    }
+    $.ajax({
+        url: '/Route/GetRoutes',
+        type: 'get',
+        data: { sectorId: sectorId },
+        dataType: 'json',
+        success: function (response) {
+            PopulateDropdown(response, routeDropdown);
+        }
+    });
+}
+
+function PopulateDropdown(items, dropdownElement) {
+    debugger;
+    var len = items.length;
+    $(dropdownElement).append("<option></option>");
+    for (var i = 0; i < len; i++) {
+        var id = items[i]['Id'];
+        var name = items[i]['Name'];
+        $(dropdownElement).append("<option value='" + id + "'>" + name + "</option>");
+    }
+    var currentValue = $(dropdownElement).attr("data-initial-value");
+    if (currentValue == "") {
+        return;
+    }
+    $(dropdownElement).val(currentValue).change();
+    $(dropdownElement).removeAttr("data-initial-value");
+
 }
 

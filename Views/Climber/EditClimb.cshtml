@@ -1,0 +1,152 @@
+﻿@using RockClimbingDb.Common;
+@using System;
+@model RockClimbingDb.ViewModels.EditClimbViewModel
+
+@{
+    ViewBag.Title = "Edit climb";
+    var climbingStyles = Enum.GetValues(typeof(ClimbEnums.AscentStyle)).Cast<ClimbEnums.AscentStyle>();
+    var climbingStylesSelectList = new List<SelectListItem>();
+    foreach (var style in climbingStyles)
+    {
+        climbingStylesSelectList.Add(new SelectListItem { Text = style.GetDisplayName(), Value = style.ToString() });
+    }
+
+
+    var climbingGrades = Enum.GetValues(typeof(ClimbEnums.Grade)).Cast<ClimbEnums.Grade>();
+    var climbingGradesSelectList = new List<SelectListItem>();
+    foreach (var grade in climbingGrades)
+    {
+        climbingGradesSelectList.Add(new SelectListItem { Text = grade.GetDisplayName(), Value = grade.ToString() });
+    }
+
+    var countries = (List<SelectListItem>)ViewBag.Countries;
+    countries.Insert(0, new SelectListItem()
+    {
+        Value = null,
+        Text = "Select Country"
+    });
+
+
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("EditClimb", "Climber", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ClimberId)
+    <h4>Edit your climb.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label("Country", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CountryId, countries, new { onchange = "addClimb_Country_onChange(this)" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Area", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.AreaId, new List<SelectListItem>(), new
+            {
+                onchange = "addClimb_Area_onChange(this)",
+                id = "area_dropdown",
+                data_initial_value = Model.AreaId
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Crag", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CragId, new List<SelectListItem>(), new
+            {
+                onchange = "addClimb_Crag_onChange(this)",
+                id = "crag_dropdown",
+                data_initial_value = Model.CragId
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Sector", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.SectorId, new List<SelectListItem>(), new
+            {
+                onchange = "addClimb_Sector_onChange(this)",
+                id = "sector_dropdown",
+                data_initial_value = Model.SectorId
+
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Route", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.RouteId, new List<SelectListItem>(), new
+            {
+                id = "route_dropdown",
+                data_initial_value = Model.RouteId
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateOfAscent, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DateOfAscent, new { @Value = @Model.DateOfAscent.ToString("yyyy-MM-dd"), @type = "date", @class = "form-control datepicker" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Style, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Style, climbingStylesSelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProposedRating, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ProposedRating, new { @class = "form-control", @type = "number", @min = "0", @max = "5" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProposedGrade, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ProposedGrade, climbingGradesSelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumberOfTries, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.NumberOfTries, new { @class = "form-control", @type = "number", @min = "1" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Note, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Note, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Save Changes" />
+        </div>
+    </div>
+}
+
+<script>
+    window.onload = function () {
+        console.log("Test");
+        $("#CountryId").change();
+    };
+</script>

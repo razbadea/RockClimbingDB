@@ -1,5 +1,7 @@
 ﻿@using RockClimbingDb.Common;
 @using System;
+@using RockClimbingDb.ViewModels;
+
 @model RockClimbingDb.Models.Climb
 
 @{
@@ -19,7 +21,15 @@
         climbingGradesSelectList.Add(new SelectListItem { Text = grade.GetDisplayName(), Value = grade.ToString() });
     }
 
+    var countries = (List<SelectListItem>)ViewBag.Countries;
+    countries.Insert(0, new SelectListItem()
+    {
+        Value = null,
+        Text = "Select Country"
+    });
 
+
+    var routeLocation = new RouteDetailsViewModel();
     var routes = (List<SelectListItem>)ViewBag.Routes;
 
 }
@@ -32,11 +42,55 @@
     <h4>Congrats! Create a new climb.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
     <div class="form-group">
-        @Html.LabelFor(m => m.RouteId, new { @class = "col-md-2 control-label" })
+        @Html.Label("Country", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.DropDownListFor(m => m.RouteId, routes)*@
-            @Html.DropDownListFor(m => m.RouteId, routes)
+            @Html.DropDownList("Country", countries, new { onchange = "addClimb_Country_onChange(this)" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Area", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Area", new List<SelectListItem>(), new
+            {
+                onchange = "addClimb_Area_onChange(this)",
+                id = "area_dropdown"
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Crag", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Crag", new List<SelectListItem>(), new
+            {
+                onchange = "addClimb_Crag_onChange(this)",
+                id = "crag_dropdown"
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Sector", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Sector", new List<SelectListItem>(), new
+            {
+                onchange = "addClimb_Sector_onChange(this)",
+                id = "sector_dropdown"
+
+            })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Route", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.RouteId, new List<SelectListItem>(), new
+            {
+                id = "route_dropdown"
+            })
         </div>
     </div>
 

@@ -28,6 +28,7 @@ namespace RockClimbingDb.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<RockClimbingDbContext>(null);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }
