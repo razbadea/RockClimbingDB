@@ -13,7 +13,7 @@ namespace RockClimbingDb.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202110261028352_InitialMigration"; }
+            get { return "202111101431019_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

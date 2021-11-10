@@ -3,6 +3,7 @@ using RockClimbingDb.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using RockClimbingDb.Migrations;
 
 namespace RockClimbingDb.DAL
 {
@@ -28,7 +29,8 @@ namespace RockClimbingDb.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<RockClimbingDbContext>(null);
+            //Database.SetInitializer<RockClimbingDbContext>(null);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RockClimbingDbContext, Configuration>()); ; ;
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }

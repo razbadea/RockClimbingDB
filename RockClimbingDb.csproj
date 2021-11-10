@@ -195,15 +195,14 @@
     <Compile Include="DAL\ClimberRepository.cs" />
     <Compile Include="DAL\CountryRepository.cs" />
     <Compile Include="DAL\CragRepository.cs" />
-    <Compile Include="DAL\RockClimbInitializer.cs" />
     <Compile Include="DAL\RouteRepository.cs" />
     <Compile Include="DAL\SectorRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202110261028352_InitialMigration.cs" />
-    <Compile Include="Migrations\202110261028352_InitialMigration.Designer.cs">
-      <DependentUpon>202110261028352_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202111101431019_InitialMigration.cs" />
+    <Compile Include="Migrations\202111101431019_InitialMigration.Designer.cs">
+      <DependentUpon>202111101431019_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -564,8 +563,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202110261028352_InitialMigration.resx">
-      <DependentUpon>202110261028352_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111101431019_InitialMigration.resx">
+      <DependentUpon>202111101431019_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
