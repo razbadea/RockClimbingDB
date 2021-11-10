@@ -33,7 +33,12 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Routes", "Index", "Route")</li>
-                    <li>@Html.ActionLink("My Climbs", "Climbs", "Climber")</li>
+                    @{
+                        if (User.IsInRole("User"))
+                        {
+                            <li>@Html.ActionLink("My Climbs", "Climbs", "Climber")</li>
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

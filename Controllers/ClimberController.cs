@@ -27,6 +27,8 @@ namespace RockClimbingDb.Controllers
             _areaRepository = new AreaRepository();
             _countryRepository = new CountryRepository();
         }
+
+        [Authorize(Roles = "User")]
         public ActionResult Climbs()
         {
             var userName = User.Identity.Name;
@@ -34,8 +36,8 @@ namespace RockClimbingDb.Controllers
             return View(model);
         }
 
-        // GET: /Climb/Add
-        [AllowAnonymous]
+
+        [Authorize(Roles = "User")]
         public ActionResult AddClimb()
         {
             ViewBag.Countries = _countryRepository.GetCountriesAsSelectList();
@@ -43,9 +45,8 @@ namespace RockClimbingDb.Controllers
             return View();
         }
 
-        // POST: /Climb/Add
         [HttpPost]
-
+        [Authorize(Roles = "User")]
         [ValidateAntiForgeryToken]
         public ActionResult AddClimb(Climb model)
         {
@@ -70,7 +71,9 @@ namespace RockClimbingDb.Controllers
             ViewBag.Routes = _routeRepository.GetRoutesAsSelectList();
             return View(model);
         }
+
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ActionResult EditClimb(int id) 
         {
             ViewBag.Countries = _countryRepository.GetCountriesAsSelectList();
@@ -78,7 +81,7 @@ namespace RockClimbingDb.Controllers
             return View("EditClimb", model);
         }
 
-
+        [Authorize(Roles = "User")]
         public ActionResult EditClimb(Climb model)
         {
             if (ModelState.IsValid)
@@ -88,17 +91,16 @@ namespace RockClimbingDb.Controllers
             }
             ViewBag.Routes = _routeRepository.GetRoutesAsSelectList();
             return View(model);
-
-
         }
 
-
+        [Authorize(Roles = "User")]
         public ActionResult DeleteClimb(int id)
         {
             _climbRepository.DeleteClimb(id);
             return RedirectToAction("Climbs");
         }
 
+        [Authorize(Roles = "User")]
         public ActionResult GetClimbDetails(int id)
         {
             var climb = _climbRepository.GetClimbById(id);

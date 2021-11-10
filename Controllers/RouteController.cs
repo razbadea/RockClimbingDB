@@ -15,7 +15,7 @@ namespace RockClimbingDb.Controllers
     {
         private readonly RouteRepository _routeRepository;
         private readonly SectorRepository _sectorRepository;
-        private readonly CragRepository _cragRepositroy;
+        private readonly CragRepository _cragRepository;
         private readonly AreaRepository _areaRepository;
         private readonly CountryRepository _countryRepository;
         private readonly List<SelectListItem> _countrySelectList;
@@ -24,13 +24,14 @@ namespace RockClimbingDb.Controllers
         {
             _routeRepository = new RouteRepository();
             _sectorRepository = new SectorRepository();
-            _cragRepositroy = new CragRepository();
+            _cragRepository = new CragRepository();
             _areaRepository = new AreaRepository();
             _countryRepository = new CountryRepository();
 
             _countrySelectList = _countryRepository.GetCountriesAsSelectList();
         }
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var model = _routeRepository
@@ -38,14 +39,14 @@ namespace RockClimbingDb.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.Countries = _countrySelectList;
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Route model)
@@ -65,31 +66,36 @@ namespace RockClimbingDb.Controllers
             return View(model);
         }
 
-        public ActionResult GetAreas(int? countryId)
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int id)
         {
-            var result = _areaRepository.GetAllAreasByCountry(countryId);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            ViewBag.Countries = _countryRepository.GetCountriesAsSelectList();
+            var model = _routeRepository.GetEditRouteViewModelByRouteId(id);
+            return View("Edit", model);
         }
 
-        public ActionResult GetCrags(int? areaId)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(Route model)
         {
-            var result = _cragRepositroy.GetAllCragsByArea(areaId);
-            
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (ModelState.IsValid)
+            {
+                _routeRepository.UpdateRoute(model);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Routes = _routeRepository.GetRoutesAsSelectList();
+            return View(model);
         }
 
-        public ActionResult GetSectors(int? cragId)
-        {
-            var result = _sectorRepository.GetAllSectorsByCrag(cragId);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetRoutes(int? sectorId)
+        [Authorize(Roles = "User, Admin")]
+        public ActionResult GetRoutesBySector(int? sectorId)
         {
             var result = _routeRepository.GetAllRoutesBySector(sectorId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "User, Admin")]
         public ActionResult GetRoutesByName(string routeName)
         {
             var model = _routeRepository.GetRoutesByName(routeName);

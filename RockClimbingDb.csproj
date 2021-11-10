@@ -182,16 +182,20 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\EnumExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClimberController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CragController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Controllers\SectorController.cs" />
     <Compile Include="DAL\AreaRepository.cs" />
     <Compile Include="DAL\ClimberRepository.cs" />
     <Compile Include="DAL\CountryRepository.cs" />
     <Compile Include="DAL\CragRepository.cs" />
+    <Compile Include="DAL\RockClimbInitializer.cs" />
     <Compile Include="DAL\RouteRepository.cs" />
     <Compile Include="DAL\SectorRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +224,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ClimberClimbRouteViewModel.cs" />
     <Compile Include="ViewModels\EditClimbViewModel.cs" />
+    <Compile Include="ViewModels\EditRouteViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\RouteDetailsViewModel.cs" />
   </ItemGroup>

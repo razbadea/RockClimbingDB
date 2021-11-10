@@ -6,9 +6,15 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{ 
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
+
 
 <table class="table" id="RouteTable">
     <thead>
@@ -37,46 +43,51 @@
             <th>
                 @Html.DisplayNameFor(model => model.Sector.Crag.Area.Country.Name)
             </th>
-
-
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Grade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sector.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sector.Crag.Name)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sector.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sector.Crag.Name)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sector.Crag.Area.Name)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sector.Crag.Area.Name)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sector.Crag.Area.Country.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sector.Crag.Area.Country.Name)
+            </td>
+
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </td>
+                }
+            }
+
+        </tr>
         }
     </tbody>
-   
-
 </table>
 
 <script>

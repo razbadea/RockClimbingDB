@@ -44,7 +44,7 @@ function AreaDropdown_Populate(countryId, areaDropdown) {
         return;
     }
     $.ajax({
-        url: '/Route/GetAreas',
+        url: '/Area/GetAreasByCountry',
         type: 'get',
         data: { countryId: countryId },
         dataType: 'json',
@@ -61,7 +61,7 @@ function CragDropdown_Populate(areaId, cragDropdown) {
         return;
     }
     $.ajax({
-        url: '/Route/GetCrags',
+        url: '/Crag/GetCragsByArea',
         type: 'get',
         data: { areaId: areaId },
         dataType: 'json',
@@ -78,7 +78,7 @@ function SectorDropdown_Populate(cragId, sectorDropdown) {
         return;
     }
     $.ajax({
-        url: '/Route/GetSectors',
+        url: '/Sector/GetSectorsByCrag',
         type: 'get',
         data: { cragId: cragId },
         dataType: 'json',
@@ -95,7 +95,7 @@ function RouteDropdown_Populate(sectorId, routeDropdown) {
         return;
     }
     $.ajax({
-        url: '/Route/GetRoutes',
+        url: '/Route/GetRoutesBySector',
         type: 'get',
         data: { sectorId: sectorId },
         dataType: 'json',
@@ -106,7 +106,6 @@ function RouteDropdown_Populate(sectorId, routeDropdown) {
 }
 
 function PopulateDropdown(items, dropdownElement) {
-    debugger;
     var len = items.length;
     $(dropdownElement).append("<option></option>");
     for (var i = 0; i < len; i++) {

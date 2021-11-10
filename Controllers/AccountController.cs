@@ -156,6 +156,7 @@ namespace RockClimbingDb.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     //create climber from climber repository
                     var dbUser = await UserManager.FindByEmailAsync(model.Email);                   
                     var climber = new Climber()
@@ -177,7 +178,6 @@ namespace RockClimbingDb.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    var tst = User;
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

@@ -15,6 +15,7 @@ namespace RockClimbingDb.Controllers
     {
         private RockClimbingDbContext db = new RockClimbingDbContext();
 
+        [Authorize(Roles = "Admin")]
         // GET: Country/Create
         public ActionResult Create()
         {

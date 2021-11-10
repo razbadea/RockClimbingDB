@@ -111,6 +111,48 @@ namespace RockClimbingDb.DAL
             }
         }
 
+        public EditRouteViewModel GetEditRouteViewModelByRouteId(int routeId)
+        {
+            using (var db = new RockClimbingDbContext())
+            {
+                var route = db
+                    .Routes
+                    .FirstOrDefault(t => t.Id == routeId);
+                var sector = db.Sectors.FirstOrDefault(t => t.Id == route.SectorId);
+                var crag = db.Crags.FirstOrDefault(t => t.Id == sector.CragId);
+                var area = db.Areas.FirstOrDefault(t => t.Id == crag.AreaId);
+                var country = db.Countries.First(t => t.Id == area.CountryId);
+                var result = new EditRouteViewModel()
+                {
+                    Name = route.Name,
+                    Grade = route.Grade,
+                    Rating = route.Rating,
+                    SectorId = route.SectorId,
+                    CragId = route.Sector.CragId,
+                    AreaId = route.Sector.Crag.AreaId,
+                    CountryId = route.Sector.Crag.Area.CountryId,
+                };
+
+                return result;
+            }
+        }
+
+        public void UpdateRoute(Route route)
+        {
+            using (var db = new RockClimbingDbContext())
+            {
+                var dbRoute = db.Routes.FirstOrDefault(t => t.Id == route.Id);
+                if (dbRoute != null)
+                {
+                    dbRoute.Name = route.Name;
+                    dbRoute.Grade = route.Grade;
+                    dbRoute.Rating = route.Rating;
+                    dbRoute.SectorId = route.SectorId;
+                    db.SaveChanges();
+                }
+            }
+        }
+
         public void Add(Route route)
         {
             using(var db = new RockClimbingDbContext())
