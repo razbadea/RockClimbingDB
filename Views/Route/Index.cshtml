@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RockClimbingDb.Models.Route>
+﻿@using RockClimbingDb.Common
+@model IEnumerable<RockClimbingDb.Models.Route>
 
 @{
     ViewBag.Title = "Index";
@@ -87,8 +88,8 @@
                 if (User.IsInRole("Admin"))
                 {
                     @*<td>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                     </td>
