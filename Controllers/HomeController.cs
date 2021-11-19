@@ -18,8 +18,7 @@ namespace RockClimbingDb.Controllers
 
         public ActionResult Index()
         {
-            var model = new HomeViewModel();
-            model.LatestClimbs = _climbRepository.GetLastestClimbs(5);
+            var model = _climbRepository.GetLatestClimbsViewModel(5);
             return View(model);
         }
 

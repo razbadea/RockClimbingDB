@@ -225,6 +225,7 @@
     <Compile Include="ViewModels\EditClimbViewModel.cs" />
     <Compile Include="ViewModels\EditRouteViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\LatestClimbsViewModel.cs" />
     <Compile Include="ViewModels\RouteDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -535,15 +536,10 @@
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\Index.cshtml" />
-    <Content Include="Views\Climb\Create.cshtml" />
-    <Content Include="Views\Climb\Delete.cshtml" />
     <Content Include="Views\Climber\GetClimbDetails.cshtml" />
-    <Content Include="Views\Climb\Edit.cshtml" />
-    <Content Include="Views\Climb\Index.cshtml" />
     <Content Include="Views\Climber\Climbs.cshtml" />
     <Content Include="Views\Climber\AddClimb.cshtml" />
     <Content Include="Views\Climber\EditClimb.cshtml" />
-    <Content Include="Views\Climber\AddClimb - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

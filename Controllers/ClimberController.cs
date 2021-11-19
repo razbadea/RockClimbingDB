@@ -37,6 +37,7 @@ namespace RockClimbingDb.Controllers
         }
 
 
+
         [Authorize(Roles = "User")]
         public ActionResult AddClimb()
         {

@@ -1,5 +1,5 @@
 ﻿@using RockClimbingDb.ViewModels
-@model HomeViewModel
+@model IEnumerable<LatestClimbsViewModel>
 
 @{
     ViewBag.Title = "Home Page";
@@ -10,11 +10,6 @@
 </div>
 
 
-@foreach (var climb in Model.LatestClimbs)
-{
-    <div>@climb.Note</div>
-}
-
 <div class="row">
     <div class="col-md-4">
         <h2>Enjoy your personal Rock Climbing LogBook</h2>
@@ -23,3 +18,61 @@
         </p>
     </div>
 </div>
+
+
+<div>
+    <h3>Latest Climbs in db:</h3>
+
+</div>
+<table class="table" id="RouteTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.RouteName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClimberName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfAscent)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Crag)
+            </th>
+            <th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClimberName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfAscent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Crag)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#RouteTable').DataTable();
+    });
+</script>

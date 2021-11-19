@@ -97,6 +97,28 @@ namespace RockClimbingDb.DAL
             }
         }
 
+        public List<LatestClimbsViewModel> GetLatestClimbsViewModel(int count)
+        {
+            using ( var db = new RockClimbingDbContext())
+            {
+                var latestClimbs = db.Climbs.OrderByDescending(t => t.DateOfAscent).Take(count).ToList();
+                List<LatestClimbsViewModel> result = new List<LatestClimbsViewModel>();
+                foreach (var climb in latestClimbs)
+                {
+                    LatestClimbsViewModel viewModel = new LatestClimbsViewModel()
+                    {
+                        RouteName = climb.Route.Name,
+                        ClimberName = $"{climb.Climber.FirstName} {climb.Climber.LastName}",
+                        DateOfAscent = climb.DateOfAscent,
+                        Grade = climb.Route.Grade,
+                        Crag = climb.Route.Sector.Crag.Name
+                    };
+                    result.Add(viewModel);
+                }
+                return result;
+            }
+        }
+
         public void UpdateClimb(Climb climb)
         {
             using (var db = new RockClimbingDbContext())
